@@ -25,6 +25,8 @@ export function formatValue(value: number, unit: Unit): string {
       return `${value.toFixed(1)}%`
     case 'months':
       return `${value.toFixed(1)} mo`
+    case 'days':
+      return `${Math.round(value)} days`
     case 'number':
       return value.toLocaleString('en-US')
   }

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { loopyService } from '../data/loopyService'
-import type { ChatMessage, DashboardSummary } from '../types'
+import { beginConnect } from '../lib/connections'
+import type { ChatMessage, ConnectionKind, DashboardSummary } from '../types'
 
 interface UseLoopy {
   data: DashboardSummary | null
@@ -10,6 +11,9 @@ interface UseLoopy {
   sending: boolean
   sendChat: (text: string) => Promise<void>
   acknowledgeAlert: (id: string) => void
+  /** Which connection is mid-handshake, if any. */
+  connecting: ConnectionKind | null
+  connect: (kind: ConnectionKind) => Promise<void>
 }
 
 export function useLoopy(): UseLoopy {
@@ -18,6 +22,7 @@ export function useLoopy(): UseLoopy {
   const [error, setError] = useState<string | null>(null)
   const [chat, setChat] = useState<ChatMessage[]>([])
   const [sending, setSending] = useState(false)
+  const [connecting, setConnecting] = useState<ConnectionKind | null>(null)
 
   useEffect(() => {
     let active = true
@@ -67,5 +72,36 @@ export function useLoopy(): UseLoopy {
     )
   }, [])
 
-  return { data, loading, error, chat, sending, sendChat, acknowledgeAlert }
+  const connect = useCallback(async (kind: ConnectionKind) => {
+    setConnecting(kind)
+    try {
+      const result = await beginConnect(kind)
+      setData((prev) =>
+        prev
+          ? {
+              ...prev,
+              connections: prev.connections.map((c) =>
+                c.kind === kind
+                  ? { ...c, status: 'connected', account: result.account }
+                  : c,
+              ),
+            }
+          : prev,
+      )
+    } finally {
+      setConnecting(null)
+    }
+  }, [])
+
+  return {
+    data,
+    loading,
+    error,
+    chat,
+    sending,
+    sendChat,
+    acknowledgeAlert,
+    connecting,
+    connect,
+  }
 }

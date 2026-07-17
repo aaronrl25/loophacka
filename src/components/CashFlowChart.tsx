@@ -24,7 +24,13 @@ function CashFlowChart({ data }: CashFlowChartProps) {
 
   const geom = useMemo(() => {
     const values = data.flatMap((d) => [d.projected, ...(d.actual != null ? [d.actual] : [])])
-    const step = 2_000_000
+    // Pick a "nice" gridline step (1/2/5 × 10ⁿ) targeting ~5 rows, so the axis
+    // works whether the balances are in thousands or millions.
+    const spread = Math.max(...values) - Math.min(...values) || 1
+    const rough = spread / 5
+    const mag = Math.pow(10, Math.floor(Math.log10(rough)))
+    const norm = rough / mag
+    const step = (norm >= 5 ? 5 : norm >= 2 ? 2 : 1) * mag
     const min = niceFloor(Math.min(...values), step)
     const max = niceCeil(Math.max(...values), step)
     const range = max - min || 1

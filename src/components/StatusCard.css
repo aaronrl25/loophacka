@@ -1,0 +1,89 @@
+.status {
+  background: linear-gradient(158deg, #0e5a47, #0b4638);
+  color: #eaf3ee;
+  border-radius: var(--radius);
+  padding: 22px 22px 20px;
+  box-shadow: 0 14px 30px -16px rgba(11, 60, 44, 0.6);
+}
+
+.status__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.status__label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a7c8bc;
+  font-weight: 600;
+}
+
+.status__big {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 6px 0 2px;
+}
+.status__num {
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  font-size: 60px;
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.status__unit {
+  font-size: 20px;
+  font-weight: 500;
+  color: #bbd9cd;
+}
+
+.status__trend {
+  font-size: 12.5px;
+  color: #fbe6c9;
+  margin-top: 2px;
+}
+.status__read {
+  font-size: 13px;
+  color: #a7c8bc;
+  line-height: 1.45;
+  margin-top: 4px;
+  max-width: 42ch;
+}
+.status__read strong {
+  color: #eaf3ee;
+  font-weight: 600;
+}
+
+.status__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+  margin: 16px 0 14px;
+}
+
+.status__stats {
+  display: flex;
+  gap: 14px;
+  margin: 0;
+}
+.status__stats > div {
+  flex: 1;
+  min-width: 0;
+}
+.status__stats dt {
+  font-size: 11px;
+  color: #a7c8bc;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.status__stats dd {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
