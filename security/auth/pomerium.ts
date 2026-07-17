@@ -1,4 +1,4 @@
-import { createRemoteJWKSet, jwtVerify, type JWTPayload } from 'jose'
+import { createRemoteJWKSet, jwtVerify, type JWTPayload, type JWTVerifyGetKey } from 'jose'
 import { AuthenticationError, roles, type AuthenticatedUser, type Role } from '../types.js'
 import { permissionsForRole } from '../policies/rbac.js'
 
@@ -10,10 +10,10 @@ export interface Membership {
   allowedIntegrations:readonly string[]
 }
 export type MembershipResolver=(identity:{userId:string;email:string;claims:JWTPayload})=>Promise<Membership|null>
-export interface PomeriumAuthOptions {issuer:string;audience:string;jwksUrl:string;resolveMembership:MembershipResolver}
+export interface PomeriumAuthOptions {issuer:string;audience:string;jwksUrl:string;resolveMembership:MembershipResolver;keyResolver?:JWTVerifyGetKey}
 
 export function createPomeriumAuthenticator(options:PomeriumAuthOptions){
-  const jwks=createRemoteJWKSet(new URL(options.jwksUrl))
+  const jwks=options.keyResolver??createRemoteJWKSet(new URL(options.jwksUrl))
   return async function authenticate(headers:Headers):Promise<AuthenticatedUser>{
     const assertion=headers.get('x-pomerium-jwt-assertion')
     if(!assertion)throw new AuthenticationError('Missing Pomerium JWT assertion')

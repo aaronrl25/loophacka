@@ -4,6 +4,7 @@ import mascot from "./assets/loppie.png";
 import { SecurityStatus } from "./components/security/SecurityStatus";
 import { ApprovalCard } from "./components/security/ApprovalCard";
 import { ExternalToolCard } from "./components/agent/ExternalToolCard";
+import { AwsAuthGate } from './components/auth/AwsAuthGate'
 import "./App.css";
 
 type IconName =
@@ -1182,7 +1183,7 @@ function SettingsPage() {
           </div>
           <button type="button">Save changes</button>
         </div>
-        {section === "Security" && <SecurityStatus name="Sarah Johnson" email="sarah@acme.example" organization="Acme LLC" role="Owner" expiresAt="Today at 6:30 PM" />}
+        {section === "Security" && <SecurityStatus name="Sarah Johnson" email="sarah@acme.example" organization="Acme LLC" role="Owner" expiresAt="Today at 6:30 PM" identityProvider="AWS Cognito" />}
         <label>
           Business name
           <input defaultValue="Acme Services LLC" />
@@ -2077,7 +2078,9 @@ function Landing() {
 
 function App() {
   return window.location.pathname.startsWith("/app") ? (
-    <DashboardApp />
+    <AwsAuthGate>
+      <DashboardApp />
+    </AwsAuthGate>
   ) : (
     <Landing />
   );
