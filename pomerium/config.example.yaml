@@ -1,0 +1,96 @@
+# Secrets are files or environment variables in production; never commit values.
+authenticate_service_url: https://authenticate.looper.example.com
+idp_provider: oidc
+idp_provider_url: https://identity-broker.example.com
+idp_client_id: REPLACE_FROM_SECRET_MANAGER
+idp_client_secret_file: /run/secrets/pomerium_idp_client_secret
+signing_key_file: /run/secrets/pomerium_signing_key
+cookie_secret_file: /run/secrets/pomerium_cookie_secret
+shared_secret_file: /run/secrets/pomerium_shared_secret
+pass_identity_headers: true
+
+# MCP support is experimental and currently requires a compatible Pomerium build.
+runtime_flags:
+  mcp: true
+
+routes:
+  - name: Looper Dashboard
+    from: https://app.looper.example.com
+    to: http://next-dashboard.internal:3000
+    mcp:
+      client: {}
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
+
+  - name: Looper API
+    from: https://api.looper.example.com
+    to: http://api.internal:4000
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
+
+  - name: Looper Agent
+    from: https://agent.looper.example.com
+    to: http://agent.internal:4100
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
+
+  - name: QuickBooks MCP
+    from: https://quickbooks-mcp.looper.example.com
+    to: http://quickbooks-mcp.internal:4201/mcp
+    mcp:
+      server: {}
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
+      deny:
+        and:
+          - mcp_tool:
+              starts_with: admin_
+
+  - name: Stripe MCP
+    from: https://stripe-mcp.looper.example.com
+    to: http://stripe-mcp.internal:4202/mcp
+    mcp:
+      server: {}
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
+      deny:
+        and:
+          - mcp_tool:
+              starts_with: payment_
+
+  - name: Internal Finance MCP
+    from: https://finance-mcp.looper.example.com
+    to: http://finance-mcp.internal:4203/mcp
+    mcp:
+      server: {}
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
+
+  - name: Inventory MCP
+    from: https://inventory-mcp.looper.example.com
+    to: http://inventory-mcp.internal:4204/mcp
+    mcp:
+      server: {}
+    policy:
+      allow:
+        and:
+          - domain:
+              is: acme.example
