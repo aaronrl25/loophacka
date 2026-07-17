@@ -1,0 +1,62 @@
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.kpi__label {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.kpi__value {
+  color: var(--text-h);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.kpi__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.kpi__delta {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.kpi__delta--good {
+  color: var(--good-text);
+}
+.kpi__delta--bad {
+  color: var(--critical);
+}
+.kpi__delta--flat {
+  color: var(--text-muted);
+}
+
+.kpi__period {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 11.5px;
+  margin-top: 1px;
+}
+
+.kpi__spark {
+  color: var(--accent);
+  flex-shrink: 0;
+  display: inline-flex;
+}
