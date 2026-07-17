@@ -1,0 +1,36 @@
+---
+description: Core project standards and agent behavior for Loophacka
+alwaysApply: true
+---
+
+# Loophacka
+
+React + TypeScript SPA built with Vite. Client-side only — no backend in this repo.
+
+## Commands
+
+```bash
+npm install      # setup
+npm run dev      # http://localhost:5173
+npm run build    # typecheck + production build
+npm run lint     # oxlint
+npm run preview  # preview production build
+```
+
+Run `npm run build` after non-trivial changes.
+
+## Structure
+
+- `src/main.tsx` — entry point
+- `src/components/` — shared UI (create as needed)
+- `src/hooks/` — custom hooks (create as needed)
+- `src/assets/` — imported static assets
+- `public/` — static files at root paths (e.g. `/icons.svg`)
+
+## Agent behavior
+
+- Minimize scope; only change what the task requires
+- Match existing style: single quotes, no semicolons on imports
+- Do not add npm dependencies unless required or asked
+- Do not commit or push unless explicitly requested
+- Do not create markdown docs unless requested

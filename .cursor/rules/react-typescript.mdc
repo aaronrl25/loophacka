@@ -1,0 +1,37 @@
+---
+description: React and TypeScript conventions for src files
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# React + TypeScript
+
+## React
+
+- Functional components and hooks only
+- Colocate styles in sibling `.css` files; no CSS-in-JS unless requested
+- Use `type="button"` on non-submit buttons
+- Default export for page-level components; named exports for utilities and hooks
+
+## TypeScript
+
+- Strict mode — do not weaken types or use `any`
+- `interface` for component props; `type` for unions and utilities
+- Non-null assertions (`!`) only when guaranteed (e.g. `getElementById('root')`)
+
+## Example
+
+```tsx
+interface ButtonProps {
+  label: string
+  onClick: () => void
+}
+
+export function Button({ label, onClick }: ButtonProps) {
+  return (
+    <button type="button" onClick={onClick}>
+      {label}
+    </button>
+  )
+}
+```

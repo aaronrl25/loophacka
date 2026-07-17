@@ -80,3 +80,16 @@ Do not add npm packages unless the task requires it or the user asks. This is in
 - Do not refactor unrelated code
 - Do not add tests, docs, or comments unless requested or clearly necessary
 - Do not create markdown files unless requested
+
+## Cursor Cloud specific instructions
+
+Cloud agents use `.cursor/environment.json` in this repo. On startup, dependencies are installed with `npm install` and the Vite dev server runs on port 5173.
+
+To verify changes locally:
+
+```bash
+npm run build   # typecheck + production build
+npm run lint    # oxlint
+```
+
+No environment variables or secrets are required for this project.
