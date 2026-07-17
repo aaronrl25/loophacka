@@ -1,14 +1,22 @@
 import { useCallback, useEffect, useState } from 'react'
 import {
+  confirmSignUp,
   confirmSignIn,
   getCurrentUser,
+  resendSignUpCode,
   signIn,
   signOut,
+  signUp,
   type AuthUser,
 } from 'aws-amplify/auth'
 import { isAwsAuthConfigured } from '../lib/aws/amplify'
 
-type AuthStatus = 'checking' | 'signed-out' | 'challenge' | 'signed-in'
+type AuthStatus =
+  | 'checking'
+  | 'signed-out'
+  | 'challenge'
+  | 'signup-confirmation'
+  | 'signed-in'
 
 function authErrorMessage(error: unknown) {
   return error instanceof Error ? error.message : 'Authentication failed. Please try again.'
@@ -19,6 +27,7 @@ export function useAwsAuth() {
   const [user, setUser] = useState<AuthUser | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [pendingUsername, setPendingUsername] = useState<string | null>(null)
 
   const restoreSession = useCallback(async () => {
     if (!isAwsAuthConfigured) {
@@ -74,6 +83,78 @@ export function useAwsAuth() {
     }
   }
 
+  const register = async (name: string, email: string, password: string) => {
+    setIsSubmitting(true)
+    setError(null)
+    try {
+      const result = await signUp({
+        username: email,
+        password,
+        options: {
+          userAttributes: {
+            email,
+            name,
+          },
+        },
+      })
+      setPendingUsername(email)
+      if (result.isSignUpComplete) {
+        setStatus('signed-out')
+        return true
+      }
+      setStatus('signup-confirmation')
+      return false
+    } catch (caught) {
+      setError(authErrorMessage(caught))
+      return false
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const confirmRegistration = async (confirmationCode: string) => {
+    if (!pendingUsername) {
+      setError('Start sign-up again before confirming your account.')
+      return false
+    }
+
+    setIsSubmitting(true)
+    setError(null)
+    try {
+      const result = await confirmSignUp({
+        username: pendingUsername,
+        confirmationCode,
+      })
+      if (result.isSignUpComplete) {
+        setStatus('signed-out')
+        return true
+      }
+      return false
+    } catch (caught) {
+      setError(authErrorMessage(caught))
+      return false
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const resendRegistrationCode = async () => {
+    if (!pendingUsername) {
+      setError('Start sign-up again before requesting another code.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setError(null)
+    try {
+      await resendSignUpCode({ username: pendingUsername })
+    } catch (caught) {
+      setError(authErrorMessage(caught))
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const logout = async () => {
     await signOut()
     setUser(null)
@@ -88,6 +169,9 @@ export function useAwsAuth() {
     isSubmitting,
     login,
     confirmChallenge,
+    register,
+    confirmRegistration,
+    resendRegistrationCode,
     logout,
   }
 }

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import mascot from "./assets/loppie.png";
+import loppieCashFlow from './assets/loopie_pose_1.png'
+import loppieInsights from './assets/loopie_pose_2.png'
+import loppiePlan from './assets/loopie_pose_3.png'
 import { SecurityStatus } from "./components/security/SecurityStatus";
 import { ApprovalCard } from "./components/security/ApprovalCard";
 import { ExternalToolCard } from "./components/agent/ExternalToolCard";
@@ -499,7 +501,7 @@ function Chat() {
     <aside className="chat">
       <div className="chat-head">
         <span className="chat-avatar">
-          <img src={mascot} alt="Looper mascot" />
+          <img src={loppieCashFlow} alt="Looper mascot" />
         </span>
         <div>
           <b>Looper Agent</b>
@@ -511,7 +513,7 @@ function Chat() {
       </div>
       <div className="messages">
         <div className="bot row">
-          <img src={mascot} alt="" />
+          <img src={loppiePlan} alt="" />
           <p>
             Hi Sarah! I’m Looper,
             <br />
@@ -519,7 +521,7 @@ function Chat() {
           </p>
         </div>
         <div className="bot row">
-          <img src={mascot} alt="" />
+          <img src={loppieInsights} alt="" />
           <p>
             I can help you with:
             <br />
@@ -540,7 +542,7 @@ function Chat() {
           </p>
         </div>
         <div className="bot row">
-          <img src={mascot} alt="" />
+          <img src={loppieCashFlow} alt="" />
           <p>
             Your cash flow is strong! 💪
             <br />
@@ -556,7 +558,7 @@ function Chat() {
           </p>
         </div>
         <div className="bot row">
-          <img src={mascot} alt="" />
+          <img src={loppieInsights} alt="" />
           <div className="bot-stack">
             <p>Here’s your cash flow breakdown for May:</p>
             <div className="chat-chart">
@@ -1088,7 +1090,7 @@ function InsightsPage() {
             forecast.
           </p>
         </div>
-        <img src={mascot} alt="LoopCFO mascot" />
+        <img src={loppieInsights} alt="Loppie presenting business insights" />
       </section>
       <div className="insight-grid">
         {pageConfig["AI Insights"].rows.map((r, i) => (
@@ -1465,7 +1467,7 @@ function DashboardHome({ openLoppie }: { openLoppie: () => void }) {
             Ask LoopCFO anything　›
           </button>
         </div>
-        <img src={mascot} alt="LoopCFO, your AI CFO agent" />
+        <img src={loppiePlan} alt="Loppie presenting today’s financial plan" />
       </section>
       <HackathonTools openLoppie={openLoppie} />
       <MetricCards />
@@ -1724,7 +1726,7 @@ function AskLoppie() {
           <>
             <div className="loppie-portrait">
               <span />
-              <img src={mascot} alt="Loppie, your AI CFO" />
+              <img src={loppieInsights} alt="Loppie, your AI CFO" />
               <i>✦</i>
             </div>
             <div className="loppie-welcome">
@@ -1750,17 +1752,22 @@ function AskLoppie() {
           <div className="loppie-thread">
             {messages.map((message, index) => (
               <div className={message.role} key={`${message.role}-${index}`}>
-                {message.role === "loppie" && <img src={mascot} alt="" />}
+                {message.role === "loppie" && <img src={loppieCashFlow} alt="" />}
                 <p>{message.text}</p>
               </div>
             ))}
             {status === "thinking" && (
-              <div className="loppie">
-                <img src={mascot} alt="" />
+              <div className="loppie loppie-loading-answer" role="status" aria-label="Loppie is preparing an answer">
+                <span className="loppie-thinking-poses" aria-hidden="true">
+                  <img src={loppieCashFlow} alt="" />
+                  <img src={loppieInsights} alt="" />
+                  <img src={loppiePlan} alt="" />
+                </span>
                 <p className="loppie-thinking">
                   <i />
                   <i />
                   <i />
+                  <span>Working through your numbers</span>
                 </p>
               </div>
             )}
@@ -1925,7 +1932,7 @@ function Landing() {
               <em>↑ 12.4% this month</em>
             </div>
             <img
-              src={mascot}
+              src={loppiePlan}
               alt="Friendly LoopCFO snake mascot holding a calculator and today's plan"
             />
             <div className="landing-float insight">
@@ -2038,7 +2045,7 @@ function Landing() {
             </ul>
           </div>
           <div className="why-mascot">
-            <img src={mascot} alt="LoopCFO mascot" />
+            <img src={loppieCashFlow} alt="Loppie reviewing cash flow" />
             <div>
               <span>Today’s outlook</span>
               <b>Looking strong</b>

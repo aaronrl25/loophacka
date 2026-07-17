@@ -1853,6 +1853,40 @@
   gap: 4px;
   min-height: 38px;
 }
+.loppie-thinking > span {
+  margin-left: 5px;
+  color: #5b7462;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.loppie-thread .loppie-thinking-poses {
+  position: relative;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+}
+.loppie-thread .loppie-thinking-poses img {
+  position: absolute;
+  inset: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  object-fit: contain;
+  background: transparent;
+  opacity: 0;
+  mix-blend-mode: normal;
+  filter: drop-shadow(0 5px 5px rgba(31, 65, 42, 0.12));
+  animation: loppie-pose-cycle 3s ease-in-out infinite;
+}
+.loppie-thread .loppie-thinking-poses img:nth-child(2) {
+  animation-delay: 1s;
+}
+.loppie-thread .loppie-thinking-poses img:nth-child(3) {
+  animation-delay: 2s;
+}
+.loppie-loading-answer {
+  align-items: center;
+}
 .loppie-thinking i {
   width: 5px;
   height: 5px;
@@ -1875,6 +1909,32 @@
   }
   30% {
     transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+@keyframes loppie-pose-cycle {
+  0%,
+  8% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.92);
+  }
+  18%,
+  34% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  44%,
+  100% {
+    opacity: 0;
+    transform: translateY(-3px) scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loppie-thread .loppie-thinking-poses img {
+    animation: none;
+  }
+  .loppie-thread .loppie-thinking-poses img:first-child {
     opacity: 1;
   }
 }

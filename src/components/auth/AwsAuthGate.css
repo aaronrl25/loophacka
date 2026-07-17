@@ -68,6 +68,21 @@
   cursor: pointer;
 }
 
+.aws-auth-card form .aws-auth-text-button {
+  margin-top: 2px;
+  padding: 8px;
+  color: #315f40;
+  background: transparent;
+}
+
+.aws-auth-card .aws-password-help {
+  margin: 0;
+  color: #728078;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
 .aws-auth-card button:disabled {
   cursor: not-allowed;
   opacity: 0.55;
@@ -80,8 +95,59 @@
   font-weight: 600;
 }
 
+.aws-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 14px;
+  color: #829086;
+}
+
+.aws-auth-divider::before,
+.aws-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #dfe8df;
+}
+
+.aws-auth-card .demo-access-button {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #315f40;
+  border-radius: 10px;
+  background: #f2faf4;
+  color: #214d31;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aws-auth-card .demo-access-note {
+  margin-top: 10px;
+  color: #6b786f;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: none;
+}
+
+.demo-access-banner {
+  position: fixed;
+  z-index: 21;
+  top: 0;
+  left: 50%;
+  padding: 8px 16px;
+  border-radius: 0 0 12px 12px;
+  background: #fff3bf;
+  color: #614f0b;
+  font-size: 13px;
+  font-weight: 700;
+  transform: translateX(-50%);
+}
+
 .aws-auth-notice,
-.aws-auth-error {
+.aws-auth-error,
+.aws-auth-success {
   margin: 18px 0;
   padding: 12px;
   border-radius: 10px;
@@ -99,6 +165,26 @@
 .aws-auth-error {
   background: #fff0f0;
   color: #9f2929;
+}
+
+.aws-auth-success {
+  background: #eaf8ee;
+  color: #236036;
+}
+
+.aws-auth-switch {
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+.aws-auth-switch button {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #315f40;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .aws-sign-out {
