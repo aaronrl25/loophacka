@@ -6,6 +6,7 @@ interface SecurityStatusProps {
   organization: string;
   role: string;
   expiresAt: string;
+  identityProvider: string;
 }
 
 export function SecurityStatus({
@@ -14,6 +15,7 @@ export function SecurityStatus({
   organization,
   role,
   expiresAt,
+  identityProvider,
 }: SecurityStatusProps) {
   return (
     <div className="security-status">
@@ -45,6 +47,10 @@ export function SecurityStatus({
         <div>
           <dt>Role</dt>
           <dd>{role}</dd>
+        </div>
+        <div>
+          <dt>Identity provider</dt>
+          <dd>{identityProvider}</dd>
         </div>
         <div>
           <dt>Session expires</dt>

@@ -7,7 +7,7 @@ interface Runner {run(args:string[],timeoutMs?:number):Promise<string>}
 const defaultRunner:Runner={async run(args,timeoutMs=30_000){const {stdout}=await execFileAsync(process.env.ZERO_RUNNER||'zero',args,{timeout:timeoutMs,maxBuffer:2*1024*1024});return stdout}}
 interface RawCapability {id:string;token:string;slug:string;canonicalName?:string;name:string;description?:string;whatItDoes?:string;method:string;url:string;cost?:{amount:string;asset:string};pricing?:{kind:string};rating?:{successRate:string};availabilityStatus?:'healthy'|'unknown'|'down'}
 
-function inferRisk(capability:RawCapability){const text=`${capability.canonicalName} ${capability.description} ${capability.whatItDoes}`.toLowerCase();return /send|pay|purchase|order|subscribe|delete|write/.test(text)?'high':/upload|document|customer|invoice/.test(text)?'medium':'low'}
+function inferRisk(capability:RawCapability){const text=`${capability.canonicalName} ${capability.description} ${capability.whatItDoes}`.toLowerCase();return /\b(send|pay|purchase|order|subscribe|delete|write)\b/.test(text)?'high':/\b(upload|document|customer|invoice)\b/.test(text)?'medium':'low'}
 function inferCategory(text:string){for(const category of ['payroll','messaging','research','shipping','document','invoice','market'])if(text.includes(category))return category;return 'general'}
 
 export class ZeroClient {

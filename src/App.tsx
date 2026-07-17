@@ -13,6 +13,7 @@ import ChatPanel from './components/ChatPanel'
 import type { ConnectionKind } from './types'
 import './App.css'
 
+
 type View = 'briefing' | 'money' | 'assistant' | 'connect'
 
 const NAV: { id: View; label: string; icon: ReactNode }[] = [
@@ -289,6 +290,8 @@ function App() {
       )}
     </div>
   )
+}
+
 }
 
 export default App

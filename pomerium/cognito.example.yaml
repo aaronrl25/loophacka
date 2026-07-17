@@ -1,0 +1,16 @@
+# AWS Cognito is the identity provider; Pomerium remains the public entry point.
+# Copy these values into the Pomerium Zero identity-provider settings, or merge
+# them into config.yaml when running self-hosted Pomerium Core.
+authenticate_service_url: https://authenticate.looper.example.com
+idp_provider: oidc
+idp_provider_url: https://cognito-idp.us-west-2.amazonaws.com/REPLACE_USER_POOL_ID
+idp_client_id: REPLACE_COGNITO_APP_CLIENT_ID
+idp_client_secret_file: /run/secrets/cognito_app_client_secret
+idp_scopes: openid,profile,email
+
+# Keep the existing Looper routes and policies from config.example.yaml.
+# Cognito's app client must use:
+#   Callback URL: https://authenticate.looper.example.com/oauth2/callback
+#   Sign-out URL: https://authenticate.looper.example.com/.pomerium/signed_out
+#   OAuth grant: Authorization code grant
+#   Scopes: openid, email, profile

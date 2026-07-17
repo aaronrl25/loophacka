@@ -1,0 +1,201 @@
+.aws-auth-page,
+.aws-auth-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: radial-gradient(circle at top, #edf9f0, #f7f7f2 58%);
+}
+
+.aws-auth-card {
+  width: min(100%, 440px);
+  padding: 36px;
+  border: 1px solid #dfe8df;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgb(21 34 25 / 12%);
+}
+
+.aws-auth-card > img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.aws-auth-card small {
+  display: block;
+  margin-top: 18px;
+  color: #55715d;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.aws-auth-card h1 {
+  margin: 8px 0;
+  font-size: 30px;
+}
+
+.aws-auth-card > p {
+  margin: 0 0 24px;
+  color: #617066;
+}
+
+.aws-auth-card form {
+  display: grid;
+  gap: 10px;
+}
+
+.aws-auth-card label {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.aws-auth-card input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #cfdacf;
+  border-radius: 10px;
+}
+
+.aws-auth-card form button {
+  margin-top: 12px;
+  padding: 13px 16px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  background: #163f28;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aws-auth-card form .aws-auth-text-button {
+  margin-top: 2px;
+  padding: 8px;
+  color: #315f40;
+  background: transparent;
+}
+
+.aws-auth-card .aws-password-help {
+  margin: 0;
+  color: #728078;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.aws-auth-card button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.aws-auth-card > a {
+  display: inline-block;
+  margin-top: 24px;
+  color: #315f40;
+  font-weight: 600;
+}
+
+.aws-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 14px;
+  color: #829086;
+}
+
+.aws-auth-divider::before,
+.aws-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #dfe8df;
+}
+
+.aws-auth-card .demo-access-button {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #315f40;
+  border-radius: 10px;
+  background: #f2faf4;
+  color: #214d31;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aws-auth-card .demo-access-note {
+  margin-top: 10px;
+  color: #6b786f;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: none;
+}
+
+.demo-access-banner {
+  position: fixed;
+  z-index: 21;
+  top: 0;
+  left: 50%;
+  padding: 8px 16px;
+  border-radius: 0 0 12px 12px;
+  background: #fff3bf;
+  color: #614f0b;
+  font-size: 13px;
+  font-weight: 700;
+  transform: translateX(-50%);
+}
+
+.aws-auth-notice,
+.aws-auth-error,
+.aws-auth-success {
+  margin: 18px 0;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.aws-auth-notice {
+  background: #fff8dc;
+  color: #735f15;
+}
+
+.aws-auth-notice code {
+  margin: 0 3px;
+}
+
+.aws-auth-error {
+  background: #fff0f0;
+  color: #9f2929;
+}
+
+.aws-auth-success {
+  background: #eaf8ee;
+  color: #236036;
+}
+
+.aws-auth-switch {
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+.aws-auth-switch button {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #315f40;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aws-sign-out {
+  position: fixed;
+  z-index: 20;
+  right: 20px;
+  bottom: 20px;
+  padding: 10px 14px;
+  border: 1px solid #cbd8ce;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(21 34 25 / 14%);
+  cursor: pointer;
+}
