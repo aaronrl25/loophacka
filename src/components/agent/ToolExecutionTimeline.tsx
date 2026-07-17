@@ -1,2 +1,24 @@
-const timelineSteps=['Analyzing request','Searching capabilities','Evaluating providers','Waiting for approval','Running tool','Validating result','Financial recommendation ready'] as const
-export function ToolExecutionTimeline({active}:{active:number}){return <ol className="tool-timeline">{timelineSteps.map((step,index)=><li className={index<active?'done':index===active?'active':''} key={step}><i>{index<active?'✓':index+1}</i><span>{step}</span></li>)}</ol>}
+const timelineSteps = [
+  "Analyzing request",
+  "Searching capabilities",
+  "Evaluating providers",
+  "Waiting for approval",
+  "Running tool",
+  "Validating result",
+  "Financial recommendation ready",
+] as const;
+export function ToolExecutionTimeline({ active }: { active: number }) {
+  return (
+    <ol className="tool-timeline">
+      {timelineSteps.map((step, index) => (
+        <li
+          className={index < active ? "done" : index === active ? "active" : ""}
+          key={step}
+        >
+          <i>{index < active ? "✓" : index + 1}</i>
+          <span>{step}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
