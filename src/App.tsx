@@ -1758,17 +1758,31 @@ function AskLoppie() {
             ))}
             {status === "thinking" && (
               <div className="loppie loppie-loading-answer" role="status" aria-label="Loppie is preparing an answer">
-                <span className="loppie-thinking-poses" aria-hidden="true">
-                  <img src={loppieCashFlow} alt="" />
-                  <img src={loppieInsights} alt="" />
-                  <img src={loppiePlan} alt="" />
-                </span>
-                <p className="loppie-thinking">
-                  <i />
-                  <i />
-                  <i />
-                  <span>Working through your numbers</span>
-                </p>
+                <div className="loppie-loading-card">
+                  <div className="loppie-loading-copy">
+                    <b>Loppie is working on your idea</b>
+                    <span>Checking the numbers and preparing a clear answer</span>
+                  </div>
+                  <div className="loppie-thinking-poses" aria-hidden="true">
+                    <span>
+                      <img src={loppieInsights} alt="" />
+                      <small>Analyzing</small>
+                    </span>
+                    <span>
+                      <img src={loppieCashFlow} alt="" />
+                      <small>Calculating</small>
+                    </span>
+                    <span>
+                      <img src={loppiePlan} alt="" />
+                      <small>Preparing</small>
+                    </span>
+                  </div>
+                  <p className="loppie-thinking" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                  </p>
+                </div>
               </div>
             )}
             {messages.some(message => message.role === "user" && message.text.toLowerCase().includes("pay invoice")) && <ApprovalCard />}
