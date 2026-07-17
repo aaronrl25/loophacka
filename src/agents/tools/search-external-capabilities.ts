@@ -1,0 +1,3 @@
+import type { CapabilitySearchService } from '../../lib/zero/capability-search.js'
+import type { ZeroSearchRequest, ZeroUserContext } from '../../lib/zero/types.js'
+export function searchExternalCapabilities(service:CapabilitySearchService){return async(context:ZeroUserContext,input:ZeroSearchRequest)=>({capabilities:(await service.search(context,input)).slice(0,5).map(item=>({id:item.capability.id,name:item.capability.name,description:item.capability.description,estimatedPrice:item.capability.pricing?.amount??0,riskLevel:item.capability.riskLevel,requiredData:item.capability.requiredData,score:item.score}))})}

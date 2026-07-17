@@ -3,6 +3,7 @@ import type { FormEvent } from "react";
 import mascot from "./assets/loppie.png";
 import { SecurityStatus } from "./components/security/SecurityStatus";
 import { ApprovalCard } from "./components/security/ApprovalCard";
+import { ExternalToolCard } from "./components/agent/ExternalToolCard";
 import "./App.css";
 
 type IconName =
@@ -1650,6 +1651,7 @@ const loppiePrompts = [
   "How is my cash flow looking?",
   "Where can I reduce expenses?",
   "Can I afford a new hire?",
+  "Find a cheaper payroll provider",
 ];
 function AskLoppie() {
   const [messages, setMessages] = useState<
@@ -1762,6 +1764,7 @@ function AskLoppie() {
               </div>
             )}
             {messages.some(message => message.role === "user" && message.text.toLowerCase().includes("pay invoice")) && <ApprovalCard />}
+            {messages.some(message => message.role === "user" && /payroll provider|cheaper payroll/i.test(message.text)) && <ExternalToolCard />}
           </div>
         )}
       </div>

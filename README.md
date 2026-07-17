@@ -2,6 +2,8 @@
 
 Looper's Pomerium Zero Trust design, backend guards, RBAC, audit logging, approval workflow, MCP policies, and deployment checklist are documented in [security/README.md](security/README.md).
 
+The Zero.xyz capability client, agent workflow, budgets, approvals, privacy controls, validation rules, demo scenarios, and architecture are documented in [docs/zero-integration.md](docs/zero-integration.md).
+
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
 Currently, two official plugins are available:
