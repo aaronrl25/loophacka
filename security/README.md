@@ -27,7 +27,7 @@ sequenceDiagram
   participant P as Pomerium
   participant API as Looper API
   participant DB as Membership DB
-  participant Agent as Loppie
+  participant Agent as Loopy
   U->>P: Request
   P->>P: Authenticate and authorize
   P->>API: X-Pomerium-Jwt-Assertion

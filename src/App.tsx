@@ -10,11 +10,16 @@ import KpiCard from './components/KpiCard'
 import CashFlowChart from './components/CashFlowChart'
 import ActivityFeed from './components/ActivityFeed'
 import ChatPanel from './components/ChatPanel'
+import { AwsAuthGate } from './components/auth/AwsAuthGate'
+import { ExternalToolCard } from './components/agent/ExternalToolCard'
+import { ApprovalCard } from './components/security/ApprovalCard'
+import { SecurityStatus } from './components/security/SecurityStatus'
+import { LandingPage } from './components/LandingPage'
 import type { ConnectionKind } from './types'
 import './App.css'
 
 
-type View = 'briefing' | 'money' | 'assistant' | 'connect'
+type View = 'briefing' | 'money' | 'assistant' | 'connect' | 'security'
 
 const NAV: { id: View; label: string; icon: ReactNode }[] = [
   {
@@ -52,6 +57,16 @@ const NAV: { id: View; label: string; icon: ReactNode }[] = [
     icon: (
       <>
         <path d="M8 3v5M16 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4" />
+      </>
+    ),
+  },
+  {
+    id: 'security',
+    label: 'Security & tools',
+    icon: (
+      <>
+        <path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6z" />
+        <path d="m9 12 2 2 4-5" />
       </>
     ),
   },
@@ -94,7 +109,7 @@ function greetingWord(): string {
   return 'Good evening'
 }
 
-function App() {
+function DashboardApp() {
   const { data, loading, error, chat, sending, sendChat, acknowledgeAlert, connecting, connect } =
     useLoopy()
   const [view, setView] = useState<View>('briefing')
@@ -265,6 +280,31 @@ function App() {
             />
           </div>
         )}
+
+        {view === 'security' && (
+          <div className="security-tools-view">
+            <header className="security-tools-view__head">
+              <p className="eyebrow">HACKATHON SECURITY LAYER</p>
+              <h2>Pomerium protects Loopy. Zero extends what Loopy can do.</h2>
+              <p>
+                Identity, permissions, approvals, external capability budgets, and audit
+                context stay visible in one place.
+              </p>
+            </header>
+            <div className="security-tools-view__grid">
+              <SecurityStatus
+                name="Sarah Johnson"
+                email="sarah@acme.example"
+                organization="Acme Services LLC"
+                role="Owner"
+                expiresAt="Today at 6:30 PM"
+                identityProvider="AWS Cognito"
+              />
+              <ExternalToolCard />
+            </div>
+            <ApprovalCard />
+          </div>
+        )}
       </main>
 
       {/* ── Mobile bottom tab bar ───────────────────────── */}
@@ -289,6 +329,16 @@ function App() {
         </div>
       )}
     </div>
+  )
+}
+
+function App() {
+  return window.location.pathname.startsWith('/app') ? (
+    <AwsAuthGate>
+      <DashboardApp />
+    </AwsAuthGate>
+  ) : (
+    <LandingPage />
   )
 }
 

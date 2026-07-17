@@ -1742,6 +1742,18 @@ body {
   text-align: center;
   animation: toast-in 0.22s ease;
 }
+
+.security-tools-view { display: grid; gap: 22px; }
+.security-tools-view__head { max-width: 720px; }
+.security-tools-view__head .eyebrow { margin: 0 0 8px; color: var(--accent-strong); font-size: 11px; font-weight: 750; letter-spacing: .12em; }
+.security-tools-view__head h2 { margin: 0; color: var(--text-h); font-size: clamp(25px, 3vw, 38px); line-height: 1.12; letter-spacing: -.03em; }
+.security-tools-view__head > p:last-child { color: var(--text-muted); line-height: 1.6; }
+.security-tools-view__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 18px; align-items: start; }
+.security-tools-view > .approval-card { max-width: 760px; }
+
+@media (max-width: 900px) {
+  .security-tools-view__grid { grid-template-columns: 1fr; }
+}
 @keyframes toast-in {
   from {
     opacity: 0;

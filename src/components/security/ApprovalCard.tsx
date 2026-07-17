@@ -15,7 +15,7 @@ export function ApprovalCard() {
         </div>
       </header>
       <p>
-        Loppie wants to pay an invoice. No payment will occur without your
+        Loopy wants to pay an invoice. No payment will occur without your
         confirmation.
       </p>
       <dl>

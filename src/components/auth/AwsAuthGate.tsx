@@ -84,7 +84,7 @@ export function AwsAuthGate({ children }: AwsAuthGateProps) {
   return (
     <main className="aws-auth-page">
       <section className="aws-auth-card" aria-labelledby="aws-auth-title">
-        <img src={mascot} alt="Loppie" />
+        <img src={mascot} alt="Loopy" />
         <small>SECURE WORKSPACE</small>
         <h1 id="aws-auth-title">
           {mode === 'sign-up' ? 'Create your Looper account' : 'Welcome back to Looper'}
