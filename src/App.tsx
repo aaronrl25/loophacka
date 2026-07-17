@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import mascot from './assets/loppie.png'
+import loopyThinking from './assets/loopie_pose_2.png'
+import loopyPlan from './assets/loopie_pose_3.png'
 import { useLoopy } from './hooks/useLoopy'
 import { formatValue, deltaTone, formatDelta } from './lib/format'
 import StatusCard from './components/StatusCard'
@@ -121,8 +123,8 @@ function App() {
   if (loading) {
     return (
       <div className="boot">
-        <img src={mascot} alt="" className="boot__mascot" />
-        <p>Reading your accounts…</p>
+        <img src={loopyThinking} alt="" className="boot__mascot" />
+        <p>Loopy is reading your accounts…</p>
       </div>
     )
   }
@@ -180,11 +182,18 @@ function App() {
       {/* ── Main ────────────────────────────────────────── */}
       <main className="main">
         <header className="topbar">
-          <div>
-            <h1 className="topbar__greet">
-              {greetingWord()}, {company.ownerName}
-            </h1>
-            <p className="topbar__date">{asOf}</p>
+          <div className="topbar__lead">
+            {view === 'briefing' && (
+              <img className="topbar__mascot" src={loopyPlan} alt="Loopy with today’s plan" />
+            )}
+            <div>
+              <h1 className="topbar__greet">
+                {greetingWord()}, {company.ownerName}
+              </h1>
+              <p className="topbar__date">
+                {view === 'briefing' ? `Here’s your plan for ${asOf}. Keep the loop healthy.` : asOf}
+              </p>
+            </div>
           </div>
           <button type="button" className="topbar__connect" onClick={() => setView('connect')}>
             <Icon>
@@ -290,8 +299,6 @@ function App() {
       )}
     </div>
   )
-}
-
 }
 
 export default App

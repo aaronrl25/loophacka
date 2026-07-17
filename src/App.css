@@ -211,6 +211,18 @@ body {
   gap: 16px;
   margin-bottom: 22px;
 }
+.topbar__lead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.topbar__mascot {
+  flex: none;
+  width: 72px;
+  height: auto;
+  margin: -6px 0;
+}
 .topbar__greet {
   font-size: clamp(21px, 3vw, 26px);
   font-weight: 700;
@@ -1760,9 +1772,8 @@ body {
   font-size: 15px;
 }
 .boot__mascot {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+  width: 128px;
+  height: auto;
   animation: pulse 1.3s ease-in-out infinite;
 }
 @keyframes pulse {
