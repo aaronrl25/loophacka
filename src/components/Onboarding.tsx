@@ -1,5 +1,6 @@
 import type { Connection, ConnectionKind, FinancialStatus } from '../types'
 import { hasCredentials } from '../lib/connections'
+import loopyHero from '../assets/loopie_pose_1.png'
 import './Onboarding.css'
 
 interface OnboardingProps {
@@ -31,10 +32,15 @@ function Onboarding({ connections, status, connecting, onConnect, onDone }: Onbo
         </div>
       </header>
 
-      <h1 className="onboard__title">Two connections and you’re live.</h1>
-      <p className="onboard__sub">
-        Add more anytime for sharper accuracy — but you’ll see a real number after the first one.
-      </p>
+      <div className="onboard__intro">
+        <div>
+          <h1 className="onboard__title">Two connections and you’re live.</h1>
+          <p className="onboard__sub">
+            Add more anytime for sharper accuracy — but you’ll see a real number after the first one.
+          </p>
+        </div>
+        <img className="onboard__hero" src={loopyHero} alt="Loopy, your cash-flow copilot" />
+      </div>
 
       {/* Step 1 — bank */}
       <section className={`step ${bankConnected ? 'step--done' : 'step--active'}`}>

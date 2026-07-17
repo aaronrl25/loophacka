@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ChatMessage } from '../types'
+import mascot from '../assets/loppie.png'
 import './ChatPanel.css'
 
 interface ChatPanelProps {
@@ -28,9 +29,7 @@ function ChatPanel({ messages, sending, onSend }: ChatPanelProps) {
     <section className="panel chat">
       <header className="panel__head">
         <h2 className="panel__title">
-          <span className="chat__avatar" aria-hidden="true">
-            L
-          </span>
+          <img className="chat__avatar" src={mascot} alt="" aria-hidden="true" />
           Ask Loopy
         </h2>
         <span className="chat__hint">Your CFO agent</span>
