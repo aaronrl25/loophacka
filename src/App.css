@@ -1720,10 +1720,51 @@ body {
 .assistant {
   max-width: 720px;
   margin: 0 auto;
+  position: relative;
 }
 .assistant .chat {
   height: calc(100vh - 190px);
   min-height: 460px;
+}
+.assistant-thinking-character {
+  position: absolute;
+  z-index: 2;
+  top: 78px;
+  left: -205px;
+  width: 175px;
+  height: 250px;
+  pointer-events: none;
+}
+.assistant-thinking-character .loopy-thinking__poses {
+  width: 175px;
+  height: 250px;
+  margin: 0;
+}
+.assistant-thinking-character .loopy-thinking__poses figure {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.assistant-thinking-character .loopy-thinking__poses img {
+  width: 155px;
+  height: 225px;
+  filter: drop-shadow(0 18px 14px rgb(31 65 42 / 20%));
+}
+.assistant-thinking-character__idle {
+  display: block;
+  width: 155px;
+  height: 225px;
+  margin-inline: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 14px rgb(31 65 42 / 20%));
+  animation: assistant-loopy-idle 4s ease-in-out infinite;
+}
+@keyframes assistant-loopy-idle {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .assistant-thinking-character__idle { animation: none; }
 }
 
 /* ── Connect view ───────────────────────────────────────────────────────── */
@@ -1827,6 +1868,27 @@ body {
   }
   .assistant .chat {
     height: calc(100vh - 210px);
+  }
+  .assistant-thinking-character {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 145px;
+    margin-bottom: 10px;
+  }
+  .assistant-thinking-character .loopy-thinking__poses {
+    width: 130px;
+    height: 145px;
+    margin-inline: auto;
+  }
+  .assistant-thinking-character .loopy-thinking__poses img {
+    width: 82px;
+    height: 125px;
+  }
+  .assistant-thinking-character__idle {
+    width: 82px;
+    height: 125px;
   }
   .tabbar {
     display: grid;

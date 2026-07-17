@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import mascot from './assets/loppie.png'
+import loopyDefaultPose from './assets/loopie_pose_1.png'
 import loopyThinking from './assets/loopie_pose_2.png'
 import loopyPlan from './assets/loopie_pose_3.png'
 import { useLoopy } from './hooks/useLoopy'
@@ -11,7 +12,7 @@ import Onboarding from './components/Onboarding'
 import KpiCard from './components/KpiCard'
 import CashFlowChart from './components/CashFlowChart'
 import ActivityFeed from './components/ActivityFeed'
-import ChatPanel from './components/ChatPanel'
+import ChatPanel, { LoopyPoseAnimation } from './components/ChatPanel'
 import { AwsAuthGate } from './components/auth/AwsAuthGate'
 import { ExternalToolCard } from './components/agent/ExternalToolCard'
 import { ApprovalCard } from './components/security/ApprovalCard'
@@ -274,7 +275,24 @@ function DashboardApp() {
 
         {view === 'assistant' && (
           <div className="assistant">
-            <ChatPanel messages={chat} sending={sending} onSend={sendChat} />
+            <aside
+              className={`assistant-thinking-character ${sending ? 'is-thinking' : 'is-idle'}`}
+              aria-label={sending ? 'Loopy is preparing your answer' : 'Loopy, your AI CFO'}
+              role={sending ? 'status' : 'img'}
+            >
+              {sending ? (
+                <LoopyPoseAnimation />
+              ) : (
+                <img className="assistant-thinking-character__idle" src={loopyDefaultPose} alt="" />
+              )}
+            </aside>
+            <ChatPanel
+              messages={chat}
+              sending={sending}
+              onSend={sendChat}
+              largeLoading
+              externalLoading
+            />
           </div>
         )}
 

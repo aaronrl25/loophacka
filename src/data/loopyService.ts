@@ -43,7 +43,9 @@ class MockLoopyService implements LoopyService {
   }
 
   async sendMessage(text: string): Promise<ChatMessage> {
-    await delay(700)
+    // Keep the hackathon mock pending long enough to demonstrate Loopy's
+    // complete three-pose thinking sequence. A real API uses its actual latency.
+    await delay(9_500)
     return {
       id: `m-${Date.now()}`,
       role: 'loopy',

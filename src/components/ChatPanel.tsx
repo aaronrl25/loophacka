@@ -1,17 +1,38 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ChatMessage } from '../types'
 import mascot from '../assets/loppie.png'
+import loopyCashFlow from '../assets/loopie_pose_1.png'
+import loopyInsights from '../assets/loopie_pose_2.png'
+import loopyPlan from '../assets/loopie_pose_3.png'
 import './ChatPanel.css'
 
 interface ChatPanelProps {
   messages: ChatMessage[]
   sending: boolean
   onSend: (text: string) => void
+  largeLoading?: boolean
+  externalLoading?: boolean
 }
 
 const suggestions = ['Why is runway shrinking?', 'Break down the burn', 'Any overdue invoices?']
 
-function ChatPanel({ messages, sending, onSend }: ChatPanelProps) {
+export function LoopyPoseAnimation() {
+  return (
+    <div className="loopy-thinking__poses" aria-hidden="true">
+      <figure><img src={loopyCashFlow} alt="" /></figure>
+      <figure><img src={loopyInsights} alt="" /></figure>
+      <figure><img src={loopyPlan} alt="" /></figure>
+    </div>
+  )
+}
+
+function ChatPanel({
+  messages,
+  sending,
+  onSend,
+  largeLoading = false,
+  externalLoading = false,
+}: ChatPanelProps) {
   const [draft, setDraft] = useState('')
   const scrollRef = useRef<HTMLDivElement>(null)
 
@@ -41,11 +62,15 @@ function ChatPanel({ messages, sending, onSend }: ChatPanelProps) {
             {m.content}
           </div>
         ))}
-        {sending && (
-          <div className="bubble bubble--loopy bubble--typing" aria-label="Loopy is typing">
-            <span />
-            <span />
-            <span />
+        {sending && !externalLoading && (
+          <div
+            className={`loopy-thinking ${largeLoading ? 'loopy-thinking--large' : 'loopy-thinking--compact'}`}
+            role="status"
+            aria-label="Loopy is preparing your answer"
+          >
+            <div className="loopy-thinking__copy">
+              <LoopyPoseAnimation />
+            </div>
           </div>
         )}
       </div>
